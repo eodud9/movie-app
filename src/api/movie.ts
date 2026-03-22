@@ -1,4 +1,4 @@
-import type { MovieDetails, MovieTypes } from "../types/movie";
+import type { MovieTypes } from "../types/movie";
 
 const options = {
   method: "GET",
@@ -26,5 +26,13 @@ export async function getTopRated(): Promise<MovieTypes> {
 
 export async function getMovieDetails(movieId: string) {
   const res = await fetch("https://api.themoviedb.org/3/movie/" + movieId, options);
+  return res.json();
+}
+
+export async function getSearchMovies(searchParams: string): Promise<MovieTypes> {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/search/movie?query=${searchParams}&include_adult=false&language=en-US&page=1`,
+    options,
+  );
   return res.json();
 }
