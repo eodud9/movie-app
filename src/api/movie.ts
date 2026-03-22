@@ -1,4 +1,4 @@
-import type { MovieTypes } from "../types/movie";
+import type { MovieDetails, MovieTypes } from "../types/movie";
 
 const options = {
   method: "GET",
@@ -9,11 +9,22 @@ const options = {
   },
 };
 
-const resNowPlaying = await fetch("https://api.themoviedb.org/3/movie/now_playing", options);
-export const dataNowPlaying: MovieTypes = await resNowPlaying.json();
+export async function getNowPlaying(): Promise<MovieTypes> {
+  const res = await fetch("https://api.themoviedb.org/3/movie/now_playing", options);
+  return res.json();
+}
 
-const resPopular = await fetch("https://api.themoviedb.org/3/movie/popular", options);
-export const dataPopular: MovieTypes = await resPopular.json();
+export async function getPopular(): Promise<MovieTypes> {
+  const res = await fetch("https://api.themoviedb.org/3/movie/popular", options);
+  return res.json();
+}
 
-const resTopRated = await fetch("https://api.themoviedb.org/3/movie/top_rated", options);
-export const dataTopRated: MovieTypes = await resTopRated.json();
+export async function getTopRated(): Promise<MovieTypes> {
+  const res = await fetch("https://api.themoviedb.org/3/movie/top_rated", options);
+  return res.json();
+}
+
+export async function getMovieDetails(movieId: string) {
+  const res = await fetch("https://api.themoviedb.org/3/movie/" + movieId, options);
+  return res.json();
+}
