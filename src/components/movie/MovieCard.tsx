@@ -9,7 +9,7 @@ export default function MovieCard({ movie }: { movie: MovieResult }) {
     >
       <Link to={`/movie/${movie.id}`} className="flex flex-col items-center gap-4">
         <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt="Movie Image" className="w-50 h-80" />
-        <span className="max-w-11/12 text-center text-lg font-semibold">{movie.original_title}</span>
+        <span className="max-w-11/12 text-center text-lg font-semibold">{movie.title}</span>
       </Link>
     </li>
   );

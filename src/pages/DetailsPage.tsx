@@ -26,8 +26,8 @@ export default function DetailsPage() {
             className="w-130 h-150 rounded"
           />
           <section className="flex flex-col items-center gap-8 p-10">
-            <h1 className="font-extrabold text-7xl uppercase">{movieDetails.original_title}</h1>
-            <p className="text-3xl font-serif">{movieDetails.tagline}</p>
+            <h1 className="font-extrabold text-7xl uppercase">{movieDetails.title}</h1>
+            <p className="text-3xl font-semibold">{movieDetails.tagline}</p>
             <p className="flex gap-10">
               <span className="p-1 border-b">{movieDetails.release_date}</span>
               <span className="p-1 border-b">{movieDetails.vote_average} ⭐️</span>

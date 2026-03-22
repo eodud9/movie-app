@@ -10,28 +10,28 @@ const options = {
 };
 
 export async function getNowPlaying(): Promise<MovieTypes> {
-  const res = await fetch("https://api.themoviedb.org/3/movie/now_playing", options);
+  const res = await fetch("https://api.themoviedb.org/3/movie/now_playing?language=ko", options);
   return res.json();
 }
 
 export async function getPopular(): Promise<MovieTypes> {
-  const res = await fetch("https://api.themoviedb.org/3/movie/popular", options);
+  const res = await fetch("https://api.themoviedb.org/3/movie/popular?language=ko", options);
   return res.json();
 }
 
 export async function getTopRated(): Promise<MovieTypes> {
-  const res = await fetch("https://api.themoviedb.org/3/movie/top_rated", options);
+  const res = await fetch("https://api.themoviedb.org/3/movie/top_rated?language=ko", options);
   return res.json();
 }
 
 export async function getMovieDetails(movieId: string) {
-  const res = await fetch("https://api.themoviedb.org/3/movie/" + movieId, options);
+  const res = await fetch("https://api.themoviedb.org/3/movie/" + movieId + "?language=ko", options);
   return res.json();
 }
 
 export async function getSearchMovies(searchParams: string): Promise<MovieTypes> {
   const res = await fetch(
-    `https://api.themoviedb.org/3/search/movie?query=${searchParams}&include_adult=false&language=en-US&page=1`,
+    `https://api.themoviedb.org/3/search/movie?query=${searchParams}&include_adult=false&language=ko&page=1`,
     options,
   );
   return res.json();

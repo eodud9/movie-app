@@ -16,8 +16,6 @@ const router = createBrowserRouter([
   },
 ]);
 
-// Get Popular Data from TMDB
-
 function App() {
   return <RouterProvider router={router} />;
 }
