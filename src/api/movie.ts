@@ -1,4 +1,4 @@
-import type { MovieTypes } from "../types/movie";
+import type { MovieDetails, MovieTypes } from "../types/movie";
 
 const options = {
   method: "GET",
@@ -9,24 +9,32 @@ const options = {
   },
 };
 
-export async function getNowPlaying(): Promise<MovieTypes> {
-  const res = await fetch("https://api.themoviedb.org/3/movie/now_playing?language=ko", options);
-  return res.json();
+interface Movies {
+  nowPlaying: MovieTypes;
+  popular: MovieTypes;
+  topRated: MovieTypes;
 }
 
-export async function getPopular(): Promise<MovieTypes> {
-  const res = await fetch("https://api.themoviedb.org/3/movie/popular?language=ko", options);
-  return res.json();
+interface MovieDetailsResult {
+  movieDetails: MovieDetails;
+  recommendations: MovieTypes;
 }
 
-export async function getTopRated(): Promise<MovieTypes> {
-  const res = await fetch("https://api.themoviedb.org/3/movie/top_rated?language=ko", options);
-  return res.json();
+export async function getMovies(): Promise<Movies> {
+  const nowPlaying = await (await fetch("https://api.themoviedb.org/3/movie/now_playing?language=ko", options)).json();
+  const popular = await (await fetch("https://api.themoviedb.org/3/movie/popular?language=ko", options)).json();
+  const topRated = await (await fetch("https://api.themoviedb.org/3/movie/top_rated?language=ko", options)).json();
+  return { nowPlaying, popular, topRated };
 }
 
-export async function getMovieDetails(movieId: string) {
-  const res = await fetch("https://api.themoviedb.org/3/movie/" + movieId + "?language=ko", options);
-  return res.json();
+export async function getMovieDetails(movieId: string): Promise<MovieDetailsResult> {
+  const movieDetails = await (
+    await fetch("https://api.themoviedb.org/3/movie/" + movieId + "?language=ko", options)
+  ).json();
+  const recommendations = await (
+    await fetch(`https://api.themoviedb.org/3/movie/${movieId}/recommendations?language=ko&page=1`, options)
+  ).json();
+  return { movieDetails, recommendations };
 }
 
 export async function getSearchMovies(searchParams: string): Promise<MovieTypes> {

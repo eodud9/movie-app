@@ -3,9 +3,15 @@ import { Link } from "react-router";
 export default function Navbar() {
   return (
     <nav className="bg-[#151B23] py-7 px-10 flex justify-between items-center">
-      <div>
+      <div className="flex gap-7">
         <Link to="/" className="text-2xl font-bold hover:text-[#1b2634] transition-colors">
           Home
+        </Link>
+        <Link to="/movies" className="text-2xl font-bold hover:text-[#1b2634] transition-colors">
+          Movies
+        </Link>
+        <Link to="/tv-shows" className="text-2xl font-bold hover:text-[#1b2634] transition-colors">
+          TV Shows
         </Link>
       </div>
       <form action="/search">

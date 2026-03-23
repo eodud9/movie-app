@@ -1,36 +1,12 @@
-import { useEffect, useState } from "react";
-import { getNowPlaying, getPopular, getTopRated } from "../api/movie";
-import MovieSlider from "../components/movie/MovieSlider";
-import type { MovieTypes } from "../types/movie";
-
-interface Movies {
-  nowPlaying: MovieTypes;
-  popular: MovieTypes;
-  topRated: MovieTypes;
-}
-
 export default function HomePage() {
-  const [movies, setMovies] = useState<Movies>();
-  useEffect(() => {
-    async function getMovies() {
-      const nowPlaying = await getNowPlaying();
-      const popular = await getPopular();
-      const topRated = await getTopRated();
-
-      setMovies({ nowPlaying, popular, topRated });
-    }
-    getMovies();
-  }, []);
-
   return (
-    <section className="flex flex-col p-20 gap-10">
-      {movies && (
-        <>
-          <MovieSlider title="Now Playing" movies={movies.nowPlaying} />
-          <MovieSlider title="Popular" movies={movies.popular} />
-          <MovieSlider title="Top Rated" movies={movies.topRated} />
-        </>
-      )}
-    </section>
+    <div className="min-h-screen flex flex-col gap-10 justify-center items-center italic">
+      <h1 className="bg-linear-to-r from-pink-500 to-violet-500 bg-clip-text font-extrabold text-transparent text-9xl">
+        Movie App
+      </h1>
+      <p className="text-xl bg-linear-to-r from-violet-500 to-pink-500 bg-clip-text font-semibold text-transparent">
+        Every great story begins with a single frame.
+      </p>
+    </div>
   );
 }
