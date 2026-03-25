@@ -2,7 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router";
 import { getSearchMovies } from "../api/movie";
 import type { ReactNode } from "react";
-import MovieGrid from "../components/movie/MovieGrid";
+import ConetentGrid from "../components/content/ContentGrid";
+import LoadingSpinner from "../components/ui/LoadingSpinner";
 
 export default function SearchPage() {
   const [searchParams] = useSearchParams();
@@ -20,7 +21,7 @@ export default function SearchPage() {
 
   let content: ReactNode;
 
-  if (isLoading) content = <p>Loading...</p>;
+  if (isLoading) content = <LoadingSpinner />;
 
   if (isError) content = <p>Error! : {error.message}</p>;
 
@@ -28,7 +29,7 @@ export default function SearchPage() {
     content = (
       <>
         <h1 className="font-bold text-4xl mb-10">검색 결과: {search}</h1>
-        <MovieGrid movies={movies} />
+        <ConetentGrid contents={movies} />
       </>
     );
 

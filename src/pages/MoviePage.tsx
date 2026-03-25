@@ -1,7 +1,8 @@
-import MovieSlider from "../components/movie/MovieSlider";
+import ContentSlider from "../components/content/ContentSlider";
 import { useQuery } from "@tanstack/react-query";
 import { getMovies } from "../api/movie";
 import type { ReactNode } from "react";
+import LoadingSpinner from "../components/ui/LoadingSpinner";
 
 export default function MoviePage() {
   const {
@@ -16,16 +17,16 @@ export default function MoviePage() {
 
   let content: ReactNode;
 
-  if (isLoading) content = <p>Loading...</p>;
+  if (isLoading) content = <LoadingSpinner />;
 
   if (isError) content = <p>Error!: {error.message}</p>;
 
   if (movies)
     content = (
       <>
-        <MovieSlider title="상영 영화" movies={movies.nowPlaying} />
-        <MovieSlider title="인기 영화" movies={movies.popular} />
-        <MovieSlider title="최고의 평점" movies={movies.topRated} />
+        <ContentSlider title="상영 영화" contents={movies.nowPlaying} />
+        <ContentSlider title="인기 영화" contents={movies.popular} />
+        <ContentSlider title="최고의 평점" contents={movies.topRated} />
       </>
     );
 
