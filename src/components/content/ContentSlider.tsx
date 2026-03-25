@@ -1,4 +1,4 @@
-import type { ContentTypes } from "../../types/movie";
+import type { ContentTypes } from "../../types/media";
 import ContentCard from "./ContentCard";
 
 export default function ContentSlider({ title, contents }: { title: string; contents: ContentTypes }) {

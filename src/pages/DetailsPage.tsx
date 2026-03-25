@@ -1,11 +1,10 @@
 import { type ReactNode } from "react";
 import { useLocation, useParams } from "react-router";
-import { getMovieDetails } from "../api/movie";
 
 import ContentSlider from "../components/content/ContentSlider";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
-import { getTvDetails } from "../api/tv";
+import { getDetails } from "../api/media";
 
 //movie tv 다르게 함수 호출
 
@@ -13,9 +12,9 @@ export default function DetailsPage() {
   const { id } = useParams();
   const { pathname } = useLocation();
 
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["movieDetail", id],
-    queryFn: () => (pathname.startsWith("/movies") ? getMovieDetails(id!) : getTvDetails(id!)),
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["details", pathname.startsWith("/movie") ? "movie" : "tv", id],
+    queryFn: () => (pathname.startsWith("/movies") ? getDetails("movies", id!) : getDetails("tv", id!)),
   });
 
   let content: ReactNode;
@@ -24,19 +23,28 @@ export default function DetailsPage() {
 
   if (isLoading) content = <LoadingSpinner />;
 
-  if (isError) content = <p>Error! : {error.message}</p>;
+  if (isError)
+    content = (
+      <div>
+        <p>문제가 발생했습니다!</p>
+        <p>잠시후 다시 시도해주세요!</p>
+      </div>
+    );
 
   if (data) {
     recommendations = <ContentSlider contents={data?.recommendations} title="추천 목록" />;
+    const trailerVideo = data.videos.results.find(
+      (video) => video.site === "YouTube" && video.type === "Trailer" && video.key,
+    );
     trailer = (
       <>
         <h1 className="font-bold text-5xl">예고편</h1>
-        <div className="py-10">
-          {data.videos.results.length > 0 && data.videos.results[0].site === "YouTube" ? (
+        <div className="w-full aspect-video mx-auto p-10">
+          {trailerVideo ? (
             <iframe
-              src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
+              src={`https://www.youtube.com/embed/${trailerVideo.key}`}
               allowFullScreen
-              className="w-full h-200"
+              className="w-full h-full"
             />
           ) : (
             <p>해당 컨텐츠는 예고편을 지원하지 않습니다 🥲</p>

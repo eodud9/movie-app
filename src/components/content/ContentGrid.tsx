@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import type { ContentTypes } from "../../types/movie";
+import type { ContentTypes } from "../../types/media";
 
 export default function ContentGrid({ contents }: { contents: ContentTypes }) {
   return (

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router";
-import { getSearchMovies } from "../api/movie";
+import { getSearchMovies } from "../api/media";
 import type { ReactNode } from "react";
 import ConetentGrid from "../components/content/ContentGrid";
 import LoadingSpinner from "../components/ui/LoadingSpinner";

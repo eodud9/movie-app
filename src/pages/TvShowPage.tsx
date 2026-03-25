@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 import ContentSlider from "../components/content/ContentSlider";
 import { useQuery } from "@tanstack/react-query";
-import { getTvShows } from "../api/tv";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
+import { getTvShows } from "../api/media";
 
 export default function TvShowPage() {
   const {

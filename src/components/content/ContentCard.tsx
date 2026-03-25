@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import type { ContentResult } from "../../types/movie";
+import type { ContentResult } from "../../types/media";
 
 export default function ContentCard({ content }: { content: ContentResult }) {
   return (
