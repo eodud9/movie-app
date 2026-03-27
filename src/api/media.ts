@@ -6,7 +6,7 @@ interface Movies {
   topRated: ContentTypes;
 }
 
-interface MovieDetailsResult {
+export interface MovieDetailsResult {
   details: ContentDetails;
   recommendations: ContentTypes;
   videos: {
@@ -22,7 +22,7 @@ interface TvShows {
   top_rated: ContentTypes;
 }
 
-interface TvshowsDetails {
+export interface TvshowsDetails {
   details: ContentDetails;
   recommendations: ContentTypes;
   videos: {

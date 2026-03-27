@@ -3,6 +3,7 @@ import ContentSlider from "../components/content/ContentSlider";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import { getTvShows } from "../api/media";
+import SliderSkeletion from "../components/ui/skeletons/SliderSkeleton";
 
 export default function TvShowPage() {
   const {
@@ -17,7 +18,14 @@ export default function TvShowPage() {
 
   let content: ReactNode;
 
-  if (isLoading) content = <LoadingSpinner />;
+  if (isLoading)
+    content = (
+      <>
+        <SliderSkeletion />
+        <SliderSkeletion />
+        <SliderSkeletion />
+      </>
+    );
 
   if (isError) content = <p>Error!: {error.message}</p>;
 

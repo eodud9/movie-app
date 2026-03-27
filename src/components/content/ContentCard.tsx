@@ -5,7 +5,7 @@ export default function ContentCard({ content }: { content: ContentResult }) {
   return (
     <li
       key={content.id}
-      className="shrink-0 p-7 rounded bg-[#151B23] cursor-pointer hover:bg-amber-800 hover:-translate-y-4 transition-all"
+      className="shrink-0 w-70 p-7 rounded bg-[#151B23] cursor-pointer hover:bg-amber-800 hover:-translate-y-4 transition-all"
     >
       <Link
         to={`${content.name ? "/tv-shows/" : "/movies/"}${content.id}`}
@@ -14,9 +14,9 @@ export default function ContentCard({ content }: { content: ContentResult }) {
         <img
           src={`https://image.tmdb.org/t/p/original/${content.poster_path}`}
           alt="Movie Image"
-          className="w-50 h-80"
+          className="w-full h-80"
         />
-        <span className="max-w-11/12 text-center text-lg font-semibold">{content.title || content.name}</span>
+        <span className="w-full text-center text-lg font-semibold">{content.title || content.name}</span>
         <span>⭐️・{content.vote_average.toFixed(1)}</span>
       </Link>
     </li>

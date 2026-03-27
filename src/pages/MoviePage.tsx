@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getMovies } from "../api/media";
 import type { ReactNode } from "react";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
+import SliderSkeletion from "../components/ui/skeletons/SliderSkeleton";
 
 export default function MoviePage() {
   const {
@@ -17,7 +18,14 @@ export default function MoviePage() {
 
   let content: ReactNode;
 
-  if (isLoading) content = <LoadingSpinner />;
+  if (isLoading)
+    content = (
+      <>
+        <SliderSkeletion />
+        <SliderSkeletion />
+        <SliderSkeletion />
+      </>
+    );
 
   if (isError) content = <p>Error!: {error.message}</p>;
 
