@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router";
 import { getSearchMovies } from "../api/media";
 import type { ReactNode } from "react";
 import ConetentGrid from "../components/content/ContentGrid";
-import LoadingSpinner from "../components/ui/LoadingSpinner";
+import SearchSkeleton from "../components/ui/skeletons/SearchSkeleton";
 
 export default function SearchPage() {
   const [searchParams] = useSearchParams();
@@ -21,7 +21,7 @@ export default function SearchPage() {
 
   let content: ReactNode;
 
-  if (isLoading) content = <LoadingSpinner />;
+  if (isLoading) content = <SearchSkeleton />;
 
   if (isError) content = <p>Error! : {error.message}</p>;
 

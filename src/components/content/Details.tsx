@@ -2,11 +2,15 @@ import { type MovieDetailsResult, type TvshowsDetails } from "../../api/media";
 
 export default function Details({ data }: { data: MovieDetailsResult | TvshowsDetails }) {
   return (
-    <div className="bg-[#151B23] p-15 flex gap-10 mb-10">
+    <div className="bg-[#151B23] p-15 flex gap-10 mb-10 shadow-2xl">
       <img
-        src={`https://image.tmdb.org/t/p/original/${data.details.poster_path}`}
+        src={
+          data.details.poster_path
+            ? `https://image.tmdb.org/t/p/original/${data.details.poster_path}`
+            : "../src/assets/no-image.png"
+        }
         alt="Movie Image"
-        className="w-130 h-150 rounded"
+        className={data.details.poster_path ? "w-130 h-150 rounded shadow-2xl  shadow-indigo-700" : "w-80 h-80"}
       />
       <section className="flex flex-col items-center gap-8 p-10">
         <h1 className="font-extrabold text-7xl uppercase">{data.details.title || data.details.name}</h1>

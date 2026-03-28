@@ -2,7 +2,6 @@ import ContentSlider from "../components/content/ContentSlider";
 import { useQuery } from "@tanstack/react-query";
 import { getMovies } from "../api/media";
 import type { ReactNode } from "react";
-import LoadingSpinner from "../components/ui/LoadingSpinner";
 import SliderSkeletion from "../components/ui/skeletons/SliderSkeleton";
 
 export default function MoviePage() {

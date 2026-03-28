@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import ContentSlider from "../components/content/ContentSlider";
 import { useQuery } from "@tanstack/react-query";
-import LoadingSpinner from "../components/ui/LoadingSpinner";
 import { getTvShows } from "../api/media";
 import SliderSkeletion from "../components/ui/skeletons/SliderSkeleton";
 
