@@ -1,20 +1,28 @@
-import { type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { useLocation, useParams } from "react-router";
 import ContentSlider from "../components/content/ContentSlider";
 import { useQuery } from "@tanstack/react-query";
 import { getDetails } from "../api/media";
-import Trailer from "../components/ui/Trailer";
 import Details from "../components/content/Details";
 import DetailsSkeleton from "../components/ui/skeletons/DetailsSkeleton";
 import TrailerSkeleton from "../components/ui/skeletons/TrailerSkeleton";
 import SliderSkeletion from "../components/ui/skeletons/SliderSkeleton";
+import TrailerModal from "../components/ui/TrailerModal";
 
 export default function DetailsPage() {
   const { id } = useParams();
   const { pathname } = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
 
   const isMovie = pathname.startsWith("/movies");
   const type = isMovie ? "movie" : "tv";
+
+  function openTrailer() {
+    setIsOpen(true);
+  }
+  function closeTrailer() {
+    setIsOpen(false);
+  }
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["details", type, id],
@@ -24,7 +32,7 @@ export default function DetailsPage() {
 
   let content: ReactNode;
   let recommendations: ReactNode;
-  let trailer: ReactNode;
+  let trailerVideo;
 
   if (isLoading)
     content = (
@@ -45,17 +53,16 @@ export default function DetailsPage() {
 
   if (data) {
     recommendations = <ContentSlider contents={data?.recommendations} title="추천 목록" />;
-    const trailerVideo = data.videos.results.find(
+    trailerVideo = data.videos.results.find(
       (video) => video.site === "YouTube" && video.type === "Trailer" && video.key,
     );
-    trailer = <Trailer videoKey={trailerVideo?.key} />;
-    content = <Details data={data} />;
+    content = <Details data={data} modalOpen={openTrailer} />;
   }
 
   return (
     <div className="p-20">
+      {isOpen && <TrailerModal videoKey={trailerVideo?.key} onClose={closeTrailer} />}
       {content}
-      {trailer}
       {recommendations}
     </div>
   );
