@@ -1,16 +1,18 @@
 export default function DetailsSkeleton() {
   return (
-    <div className="bg-[#151B23] p-15 flex gap-10 mb-10">
-      <div className="w-180 h-150 rounded bg-[#0C1117] animate-pulse"></div>
-      <section className="w-full flex flex-col items-center justify-center gap-8 p-10">
-        <h1 className="w-full h-20 bg-[#0C1117] animate-pulse font-extrabold text-7xl uppercase"></h1>
-        <p className="w-full h-15 bg-[#0C1117] animate-pulse text-3xl font-semibold"></p>
-        <p className="w-full flex gap-10">
-          <div className="p-3  w-1/3 bg-[#0C1117] animate-pulse"></div>
-          <div className="p-3  w-1/3 bg-[#0C1117] animate-pulse"></div>
-          <div className="p-3  w-1/3 bg-[#0C1117] animate-pulse"></div>
-        </p>
-        <p className="w-full bg-[#0C1117] animate-pulse h-1/2 text-xl text-center font-light"></p>
+    <div className="bg-[#151B23] p-15 flex flex-col md:flex-row gap-10 mb-10 rounded">
+      <div className="w-full md:w-1/2 aspect-2/3 rounded-lg bg-[#0C1117] animate-pulse"></div>
+
+      <section className="w-full flex flex-col gap-8 p-10">
+        <div className="w-full h-16 bg-[#0C1117] animate-pulse rounded"></div>
+        <div className="w-2/3 h-8 bg-[#0C1117] animate-pulse rounded"></div>
+
+        <div className="w-full flex gap-4">
+          <div className="w-24 h-8 bg-[#0C1117] animate-pulse rounded-full"></div>
+          <div className="w-24 h-8 bg-[#0C1117] animate-pulse rounded-full"></div>
+          <div className="w-24 h-8 bg-[#0C1117] animate-pulse rounded-full"></div>
+        </div>
+        <div className="w-full h-40 bg-[#0C1117] animate-pulse rounded mt-4"></div>
       </section>
     </div>
   );

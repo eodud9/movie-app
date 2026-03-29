@@ -32,28 +32,50 @@ export interface TvshowsDetails {
 }
 
 export async function getMovies(): Promise<Movies> {
-  const nowPlaying = await (await fetch("https://api.themoviedb.org/3/movie/now_playing?language=ko", options)).json();
-  const popular = await (await fetch("https://api.themoviedb.org/3/movie/popular?language=ko", options)).json();
-  const topRated = await (await fetch("https://api.themoviedb.org/3/movie/top_rated?language=ko", options)).json();
-  return { nowPlaying, popular, topRated };
+  // 동시에 요청 날리기
+  const [nowPlayingRes, popularRes, topRatedRes] = await Promise.all([
+    fetch("https://api.themoviedb.org/3/movie/now_playing?language=ko", options),
+    fetch("https://api.themoviedb.org/3/movie/popular?language=ko", options),
+    fetch("https://api.themoviedb.org/3/movie/top_rated?language=ko", options),
+  ]);
+
+  return {
+    nowPlaying: await nowPlayingRes.json(),
+    popular: await popularRes.json(),
+    topRated: await topRatedRes.json(),
+  };
 }
 
 export async function getTvShows(): Promise<TvShows> {
-  const airingToday = await (await fetch("https://api.themoviedb.org/3/tv/airing_today?language=ko", options)).json();
-  const onTheAir = await (await fetch("https://api.themoviedb.org/3/tv/on_the_air?language=ko", options)).json();
-  const popular = await (await fetch("https://api.themoviedb.org/3/tv/popular?language=ko", options)).json();
-  const top_rated = await (await fetch("https://api.themoviedb.org/3/tv/top_rated?language=ko", options)).json();
+  // 동시에 요청 날리기
+  const [airingTodayRes, onTheAirRes, popularRes, topRatedRes] = await Promise.all([
+    await fetch("https://api.themoviedb.org/3/tv/airing_today?language=ko", options),
+    await fetch("https://api.themoviedb.org/3/tv/on_the_air?language=ko", options),
+    await fetch("https://api.themoviedb.org/3/tv/popular?language=ko", options),
+    await fetch("https://api.themoviedb.org/3/tv/top_rated?language=ko", options),
+  ]);
 
-  return { airingToday, onTheAir, popular, top_rated };
+  return {
+    airingToday: await airingTodayRes.json(),
+    onTheAir: await onTheAirRes.json(),
+    popular: await popularRes.json(),
+    top_rated: await topRatedRes.json(),
+  };
 }
 
 export async function getDetails(type: string, id: string): Promise<MovieDetailsResult | TvshowsDetails> {
-  const details = await (await fetch(`https://api.themoviedb.org/3/${type}/${id}?language=ko`, options)).json();
-  const recommendations = await (
-    await fetch(`https://api.themoviedb.org/3/${type}/${id}/recommendations?language=ko&page=1`, options)
-  ).json();
-  const videos = await (await fetch(`https://api.themoviedb.org/3/${type}/${id}/videos`, options)).json();
-  return { details, recommendations, videos };
+  // 동시에 요청 날리기
+  const [detailsRes, recommendationsRes, videosRes] = await Promise.all([
+    await fetch(`https://api.themoviedb.org/3/${type}/${id}?language=ko`, options),
+    await fetch(`https://api.themoviedb.org/3/${type}/${id}/recommendations?language=ko&page=1`, options),
+    await fetch(`https://api.themoviedb.org/3/${type}/${id}/videos`, options),
+  ]);
+
+  return {
+    details: await detailsRes.json(),
+    recommendations: await recommendationsRes.json(),
+    videos: await videosRes.json(),
+  };
 }
 
 export async function getSearchMovies(searchParams: string): Promise<ContentTypes> {

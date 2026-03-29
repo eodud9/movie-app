@@ -1,7 +1,6 @@
 import ContentSlider from "../components/content/ContentSlider";
 import { useQuery } from "@tanstack/react-query";
 import { getMovies } from "../api/media";
-import type { ReactNode } from "react";
 import SliderSkeletion from "../components/ui/skeletons/SliderSkeleton";
 
 export default function MoviePage() {
@@ -15,27 +14,22 @@ export default function MoviePage() {
     queryFn: getMovies,
   });
 
-  let content: ReactNode;
-
   if (isLoading)
-    content = (
-      <>
-        <SliderSkeletion />
-        <SliderSkeletion />
-        <SliderSkeletion />
-      </>
+    return (
+      <section className="flex flex-col p-20 gap-10">
+        {[1, 2, 3].map((k) => (
+          <SliderSkeletion key={k} />
+        ))}
+      </section>
     );
 
-  if (isError) content = <p>Error!: {error.message}</p>;
+  if (isError || !movies) return <p className="p-20 text-center">Error!: {error?.message}</p>;
 
-  if (movies)
-    content = (
-      <>
-        <ContentSlider title="상영 영화" contents={movies.nowPlaying} />
-        <ContentSlider title="인기 영화" contents={movies.popular} />
-        <ContentSlider title="최고의 평점" contents={movies.topRated} />
-      </>
-    );
-
-  return <section className="flex flex-col p-20 gap-10">{content}</section>;
+  return (
+    <section className="flex flex-col  p-7 md:p-20 gap-2 md:gap-10">
+      <ContentSlider title="지금 상영 중" contents={movies.nowPlaying} />
+      <ContentSlider title="지금 가장 인기 있는 작품" contents={movies.popular} />
+      <ContentSlider title="놓치면 안될 최고의 평점작" contents={movies.topRated} />
+    </section>
+  );
 }

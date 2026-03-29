@@ -18,7 +18,7 @@ export default function TvShowPage() {
   let content: ReactNode;
 
   if (isLoading)
-    content = (
+    return (
       <>
         <SliderSkeletion />
         <SliderSkeletion />
@@ -26,17 +26,16 @@ export default function TvShowPage() {
       </>
     );
 
-  if (isError) content = <p>Error!: {error.message}</p>;
+  if (isError || !tvShows) content = <p>Error!: {error?.message}</p>;
 
-  if (tvShows)
-    content = (
+  return (
+    <section className="flex flex-col  p-7 md:p-20 gap-2 md:gap-10">
       <>
-        <ContentSlider title="금일 생방송 티비 시리즈" contents={tvShows.airingToday} />
-        <ContentSlider title="방영 티비 시리즈" contents={tvShows.onTheAir} />
-        <ContentSlider title="인기 티비 시리즈" contents={tvShows.popular} />
-        <ContentSlider title="최고의 평점" contents={tvShows.top_rated} />
+        <ContentSlider title="오늘 방송되는 TV 시리즈" contents={tvShows!.airingToday} />
+        <ContentSlider title="지금 뜨겁게 방영 중!" contents={tvShows!.onTheAir} />
+        <ContentSlider title="지금 가장 인기 있는 작품" contents={tvShows!.popular} />
+        <ContentSlider title="놓치면 안될 최고의 평점작" contents={tvShows!.top_rated} />
       </>
-    );
-
-  return <section className="flex flex-col p-20 gap-10">{content}</section>;
+    </section>
+  );
 }
