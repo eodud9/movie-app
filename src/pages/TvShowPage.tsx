@@ -15,8 +15,6 @@ export default function TvShowPage() {
     queryFn: getTvShows,
   });
 
-  let content: ReactNode;
-
   if (isLoading)
     return (
       <>
@@ -26,7 +24,7 @@ export default function TvShowPage() {
       </>
     );
 
-  if (isError || !tvShows) content = <p>Error!: {error?.message}</p>;
+  if (isError || !tvShows) return <p>Error!: {error?.message}</p>;
 
   return (
     <section className="flex flex-col  p-7 md:p-20 gap-2 md:gap-10">
