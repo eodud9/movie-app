@@ -13,20 +13,24 @@ export default function Navbar() {
 
   return (
     <nav className="bg-[#151B23] py-5 px-6 md:px-10 flex flex-col md:flex-row justify-between items-center gap-6">
-      <div className="flex gap-5 md:gap-7 items-center">
+      <div className="flex flex-col md:flex-row gap-5 md:gap-7 items-center">
         <Link
           to="/"
           className="text-xl md:text-2xl font-extrabold text-indigo-500 hover:text-indigo-400 transition-colors"
         >
           MEDIA QUERY
         </Link>
-
-        <Link to="/movies" className="text-sm md:text-lg font-bold hover:text-indigo-500 transition-colors">
-          Movies
-        </Link>
-        <Link to="/tv-shows" className="text-sm md:text-lg font-bold hover:text-indigo-500 transition-colors">
-          TV Shows
-        </Link>
+        <div className="flex gap-5">
+          <Link to="/movies" className="text-sm md:text-lg font-bold hover:text-indigo-500 transition-colors">
+            Movies
+          </Link>
+          <Link to="/tv-shows" className="text-sm md:text-lg font-bold hover:text-indigo-500 transition-colors">
+            TV Shows
+          </Link>
+          <Link to="/favorites" className="text-sm md:text-lg font-bold hover:text-indigo-500 transition-colors">
+            Favorites
+          </Link>
+        </div>
       </div>
       <form onSubmit={(e) => e.preventDefault()} className="flex w-full md:w-auto items-center gap-2">
         <input

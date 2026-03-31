@@ -6,10 +6,9 @@ import HomeLayout from "./components/layout/HomeLayout";
 import HomePage from "./pages/HomePage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import TvShowPage from "./pages/TvShowPage";
+import FavoritePage from "./pages/favoritePage";
 
 const client = new QueryClient();
-
-//MoviePage, TvShowPage 구조 같은데 HomeLayout에서 한 번에 처리 할 수 있을까?
 
 const router = createBrowserRouter([
   {
@@ -32,6 +31,7 @@ const router = createBrowserRouter([
         ],
       },
       { path: "search", element: <SearchPage /> },
+      { path: "favorites", element: <FavoritePage /> },
     ],
   },
 ]);

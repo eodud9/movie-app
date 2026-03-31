@@ -15,7 +15,7 @@ export default function Details({
         <img
           src={data.details.poster_path ? imgUrl : NoImg}
           alt={data.details.title || data.details.name || ""}
-          className="w-full h-full object-cover rounded-lg transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full  object-center rounded-lg transition-transform duration-500 group-hover:scale-105"
         />
         <div
           className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/50 transition-all duration-300 cursor-pointer"

@@ -6,7 +6,7 @@ import { getDetails } from "../api/media";
 import Details from "../components/content/Details";
 import DetailsSkeleton from "../components/ui/skeletons/DetailsSkeleton";
 import SliderSkeletion from "../components/ui/skeletons/SliderSkeleton";
-import TrailerModal from "../components/ui/TrailerModal";
+import TrailerModal from "../components/content/TrailerModal";
 
 export default function DetailsPage() {
   const { id } = useParams();

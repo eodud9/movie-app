@@ -1,9 +1,12 @@
 import { Link } from "react-router";
 import type { ContentResult } from "../../types/media";
 import NoImg from "../../assets/no-image.png";
+import { useFavoriteStore } from "../../store/favorite";
 
 export default function ContentCard({ content }: { content: ContentResult }) {
   const posterUrl = content.poster_path ? `https://image.tmdb.org/t/p/w500/${content.poster_path}` : NoImg;
+  const { toggleFavorite, isFavorite } = useFavoriteStore();
+  const favorited = isFavorite(content.id);
   return (
     <li
       key={content.id}
@@ -26,10 +29,18 @@ export default function ContentCard({ content }: { content: ContentResult }) {
         <div className="flex flex-col gap-1 px-1">
           <h3 className="text-lg font-semibold line-clamp-1">{content.title || content.name}</h3>
         </div>
+      </Link>
+      <div className="flex justify-between px-3 mt-5">
         <p className="text-xs text-gray-500 font-medium">
           {(content.release_date || content.first_air_date)?.split("-")[0]} ・ Movie
         </p>
-      </Link>
+        <button
+          onClick={() => toggleFavorite(content.id)}
+          className="cursor-pointer hover:scale-105 active:scale-95 transition-all"
+        >
+          {favorited ? "❤️" : "🤍"}
+        </button>
+      </div>
     </li>
   );
 }
