@@ -16,11 +16,11 @@ export default function TvShowPage() {
 
   if (isLoading)
     return (
-      <>
-        <SliderSkeletion />
-        <SliderSkeletion />
-        <SliderSkeletion />
-      </>
+      <div className="flex flex-col p-7 md:p-20">
+        {[1, 2, 3].map((k) => (
+          <SliderSkeletion key={k} />
+        ))}
+      </div>
     );
 
   if (isError || !tvShows) return <p>Error!: {error?.message}</p>;

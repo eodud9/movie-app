@@ -1,10 +1,12 @@
 import { Link } from "react-router";
-import type { ContentTypes } from "../../types/media";
+import type { ContentDetails, ContentResult } from "../../types/media";
 
-export default function ContentGrid({ contents }: { contents: ContentTypes }) {
+export type ContentItem = ContentResult | ContentDetails;
+
+export default function ContentGrid({ contents }: { contents: ContentItem[] }) {
   return (
     <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 w-full">
-      {contents?.results.map((content) => (
+      {contents?.map((content) => (
         <li key={content.id} className="group">
           <Link to={`/movies/${content.id}`} className="flex flex-col gap-3">
             <div className="relative aspect-2/3 overflow-hidden rounded-xl bg-[#151B23]">

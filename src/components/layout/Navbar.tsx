@@ -41,7 +41,10 @@ export default function Navbar() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button className="shrink-0 bg-indigo-500  px-4 py-2 rounded-lg cursor-pointer transition-all text-white text-sm md:text-base font-semibold shadow-md active:scale-95">
+        <button
+          className="shrink-0 bg-indigo-500  px-4 py-2 rounded-lg cursor-pointer transition-all text-white text-sm md:text-base font-semibold shadow-md active:scale-95"
+          onClick={() => navigate(`/search?q=${debouncedQuery}`)}
+        >
           SEARCH
         </button>
       </form>

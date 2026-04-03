@@ -23,7 +23,7 @@ export default function SearchPage() {
   if (isError || !movies) return <p>Error! : {error?.message}</p>;
 
   return (
-    <div className="flex flex-col p-5 md:p-10">
+    <div className="flex flex-col p-7 md:p-20">
       <>
         <h1 className="font-bold text-4xl mb-10">검색 결과: {search}</h1>
         <ConetentGrid contents={movies!} />
